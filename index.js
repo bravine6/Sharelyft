@@ -236,14 +236,20 @@ app.post('/forgot_password', (req, res) => {
 
   db.get(`SELECT * FROM members WHERE email = ?`, [email], (err, user) => {
       if (err) {
-          console.error("❌ Database Error:", err);
+          console.error("Database Error:", err);
           return res.status(500).send("Database error while checking user.");
       }
 
       if (!user) {
-          return res.status(400).send("User with this email does not exist.");
-      }
-
+        return res.render('password_reset_error', { 
+            title: 'Email Not Found - ShareLyft',
+            cssFile: 'password_reset_error.css',
+            jsFile: null,
+            activePage: 'forgot_password',
+            user: req.session.user || null,
+            email: email 
+        });
+    }   
       // Generate reset token
       const token = crypto.randomBytes(32).toString('hex');
       const expires_at = new Date(Date.now() + 3600000).toISOString(); // 1-hour expiry
@@ -252,11 +258,11 @@ app.post('/forgot_password', (req, res) => {
       db.run(`INSERT INTO password_reset (email, token, expires_at) VALUES (?, ?, ?)`, 
           [email, token, expires_at], function (err) {
               if (err) {
-                  console.error("❌ Database Insert Error:", err);
+                  console.error("Database Insert Error:", err);
                   return res.status(500).send("Error generating reset link.");
               }
 
-              console.log("✅ Reset token stored:", { email, token, expires_at });
+              console.log("Reset token stored:", { email, token, expires_at });
 
               // Send reset email
               const transporter = nodemailer.createTransport({
@@ -283,7 +289,14 @@ app.post('/forgot_password', (req, res) => {
                       return res.status(500).send("Error sending email.");
                   }
                   console.log("✅ Email Sent Successfully:", info.response);
-                  res.send("Reset password link sent to your email.");
+                  res.render('password_reset_sent', { 
+                    title: 'Reset Email Sent - ShareLyft', 
+                    cssFile: 'password_reset_sent.css',
+                    jsFile: null,
+                    activePage: 'forgot_password',
+                    user: req.session.user || null 
+                });
+                
               });
       });
   });
@@ -295,22 +308,22 @@ app.get('/reset_password', (req, res) => {
   const { token } = req.query;
 
   if (!token) {
-      console.error("❌ No token provided.");
+      console.error("No token provided.");
       return res.status(400).send("Invalid reset link.");
   }
 
   db.get(`SELECT * FROM password_reset WHERE token = ? AND expires_at > ?`, [token, new Date().toISOString()], (err, row) => {
       if (err) {
-          console.error("❌ Database Error:", err);
+          console.error("Database Error:", err);
           return res.status(500).send("Database error while validating token.");
       }
 
       if (!row) {
-          console.error("❌ Token not found or expired.");
+          console.error("Token not found or expired.");
           return res.status(400).send("Invalid or expired reset token.");
       }
 
-      console.log("✅ Valid token found:", row);
+      console.log("Valid token found:", row);
       res.render('reset_password', { 
           title: 'Reset Password', 
           token, 
