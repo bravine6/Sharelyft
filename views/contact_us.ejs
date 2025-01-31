@@ -1,0 +1,65 @@
+<%- include('header'); -%>
+
+    <body>
+        <!-- Include the Navbar -->
+        <%- include('navbar', { activePage: 'contact_us' }) %>
+            <main>
+                <section class="hero-section py-5 text-center">
+                    <div class="container">
+                        <h1 class="display-4">Contact Us</h1>
+                        <p class="lead">We're here to assist you with your queries and feedback!</p>
+                    </div>
+                </section>
+
+                <section class="contact-section py-5">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Contact Information -->
+                            <div class="col-md-6">
+                                <h3>Contact Information</h3>
+                                <p><strong>Address:</strong> 16 Jester Drive, Cobblebank VIC 3338</p>
+                                <p><strong>Phone:</strong> +61 0400 000 000</p>
+                                <p><strong>Email:</strong> contact@example.com</p>
+                            </div>
+
+                            <!-- Contact Form -->
+                            <div class="col-md-6">
+                                <h3>Send Us a Message</h3>
+                                <form action="/contact" method="post">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Your Email</label>
+                                        <input type="email" name="email" class="form-control" id="email"
+                                            placeholder="Enter your email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Your Message</label>
+                                        <textarea class="form-control" name="message" id="message" rows="4"
+                                            placeholder="Enter your message" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Map Placeholder -->
+                        <div class="contact-map mt-5 text-center">
+                            <h3>Our Location</h3>
+                            <div class="map-placeholder bg-light py-5">
+                                <p>Map integration coming soon!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Include the Footer -->
+            <%- include('footer') %>
+
+    </body>
+
+    </html>

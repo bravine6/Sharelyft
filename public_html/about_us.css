@@ -1,0 +1,62 @@
+/* Navbar styles */
+.navbar-custom {
+    background-color: #1a8e54;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #e9f7ef;
+    color: #1a8e54;
+    padding: 4rem 0;
+}
+
+/* Header Section */
+.header-section {
+    background-image: url('images/header-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-section h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.header-section p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* About Us Section */
+.about-us {
+    background-image: url('images/image1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 3rem 0;
+}
+
+.about-us h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.about-us p {
+    color: white;
+}
+
+/* Footer */
+footer {
+    background-color: #1b1d1f;
+    padding: 1rem 0;
+    text-align: center;
+    color: white;
+}
+
+

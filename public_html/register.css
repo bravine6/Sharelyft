@@ -1,0 +1,42 @@
+/* Navbar Customization */
+.navbar-custom {
+    background-color: #1a8e54;
+}
+
+/* Hero Section Styles */
+.hero-section {
+    background-color: #e9f7ef;
+    color: #1a8e54;
+    padding: 4rem 0;
+    margin-bottom: 0; /* Ensures no gap below */
+}
+
+/* Form Section Styles */
+.form-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.form-section .form-control {
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Button Styling */
+.form-section button {
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+/* Validation Feedback */
+.is-invalid {
+    border-color: red;
+}
+
+.is-valid {
+    border-color: green;
+}

@@ -1,0 +1,66 @@
+/* Navbar styles */
+.navbar-custom {
+    background-color: #1a8e54;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #e9f7ef;
+    color: #1a8e54;
+    padding: 4rem 0;
+}
+/* Form Section */
+#offerRideForm {
+    margin-top: 2rem;
+}
+
+/* Valid and Invalid Fields */
+.is-valid {
+    border-color: #28a745;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+/* Feedback Messages */
+.valid-feedback {
+    color: #28a745;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+}
+
+
+#offerRideForm .form-control {
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+#offerRideForm .form-select {
+    border-radius: 5px;
+}
+
+#offerRideForm button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+#offerRideForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    background-color: #1b1d1f;
+    padding: 1rem 0;
+    text-align: center;
+    color: white;
+}

@@ -1,0 +1,38 @@
+<%- include('header'); -%>
+
+    <body>
+        <!-- Include the Navbar -->
+        <%- include('navbar', { activePage: 'about_us' }) %>
+            <main>
+                <section class="hero-section py-5 text-center">
+                    <div class="container">
+                        <h1 class="display-4">About Us</h1>
+                        <p class="lead">Learn about our journey, mission, and values that make Sharelyft unique.</p>
+                    </div>
+                </section>
+
+                <!-- About Us Content -->
+                <section class="about-us py-5 text-white">
+                    <div class="container text-center">
+                        <h2 class="mb-4">Our Story</h2>
+                        <p class="lead">Welcome to ShareLyft, your one-stop platform for connecting drivers and
+                            passengers
+                            heading in the same direction.</p>
+                        <p>Founded in 2024, ShareLyft started with a simple idea: making long journeys more enjoyable
+                            and
+                            cost-effective by linking drivers with passengers.</p>
+                        <p>We believe in shared journeys to create memorable experiences, reduce travel costs, and
+                            promote
+                            eco-friendly transportation.</p>
+                        <p>Safe travels, and thanks for being a part of our journey!</p>
+                    </div>
+                </section>
+            </main>
+            <!-- Include the Footer -->
+            <%- include('footer') %>
+
+                <!-- Bootstrap JS -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+    </html>
