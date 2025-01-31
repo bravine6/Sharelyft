@@ -4,7 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const session = require('express-session');
-const bcrypt = require('bcrypt'); // For password hashing
+//const bcrypt = require('bcrypt'); // For password hashing
+const bcrypt = require('bcryptjs'); // For password hashing
 
 const crypto = require('crypto'); // For generating password reset token
 const nodemailer = require('nodemailer'); // For sending emails
