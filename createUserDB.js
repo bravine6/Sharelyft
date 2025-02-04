@@ -55,6 +55,28 @@ db.run(`CREATE TABLE IF NOT EXISTS password_reset (
   expires_at DATETIME NOT NULL
 )`);
 
+// Create rides table
+db.run(`
+  CREATE TABLE IF NOT EXISTS rides (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      driverId INTEGER,
+      leavingFrom TEXT NOT NULL,
+      goingTo TEXT NOT NULL,
+      travelDate TEXT NOT NULL,
+      departureTime TEXT NOT NULL,
+      numSeats INTEGER NOT NULL,
+      passengerType TEXT NOT NULL,
+      price REAL NOT NULL,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(driverId) REFERENCES members(id)
+  )
+`, (err) => {
+  if (err) {
+      console.error('Error creating rides table:', err.message);
+  } else {
+      console.log('✅ Table "rides" is ready.');
+  }
+});
 
 // Close the database connection
 

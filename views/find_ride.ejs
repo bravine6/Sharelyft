@@ -7,105 +7,82 @@
         <!-- SECTION TWO: Header Section -->
         <section class="hero-section py-5 text-center">
             <div class="container">
-                <h1 class="display-4">Find a ride</h1>
+                <h1 class="display-4">Find a Ride</h1>
                 <p class="lead">Plan your trip with ease. Find a ride that suits you.</p>
             </div>
         </section>
 
-        <!-- SECTION THREE: Ride Details Form -->
+        <!-- SECTION THREE: Ride Search Form -->
         <section class="find-ride-form my-5">
             <div class="container">
                 <h2>Plan Your Trip</h2>
-                <form>
+                <form action="/find_rides" method="GET">
                     <div class="mb-3">
                         <label for="leavingFrom" class="form-label">Where are you leaving from?</label>
-                        <input type="text" id="leavingFrom" class="form-control" placeholder="Enter departure location" required>
+                        <input type="text" name="leavingFrom" class="form-control" placeholder="Enter departure location" required>
                     </div>
                     <div class="mb-3">
                         <label for="goingTo" class="form-label">Where are you going?</label>
-                        <input type="text" id="goingTo" class="form-control" placeholder="Enter destination" required>
+                        <input type="text" name="goingTo" class="form-control" placeholder="Enter destination" required>
                     </div>
                     <div class="mb-3">
                         <label for="travelDate" class="form-label">When would you like to travel?</label>
-                        <input type="date" id="travelDate" class="form-control" required>
+                        <input type="date" name="travelDate" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Search for Rides</button>
                 </form>
-            </div>
-        </section>
 
-        <!-- SECTION FOUR: Filter Section -->
-        <section class="filters my-4">
-            <div class="container">
-                <h2>Filter Rides</h2>
-                <form>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="departureTime">Departure Time</label>
-                            <input type="time" id="departureTime" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="priceRange">Price Range</label>
-                            <input type="range" id="priceRange" class="form-control" min="10" max="100" step="5">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="seats">Available Seats</label>
-                            <input type="number" id="seats" class="form-control" min="1" max="4">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- SECTION FIVE: Ride Cards -->
-        <section class="ride-cards my-5">
-            <div class="container">
-                <h2>Available Rides</h2>
-                <div class="ride-container">
-                    <div class="ride-card">
-                        <img src="ride1.jpg" alt="Ride 1">
-                        <h3>Melbourne to Sydney</h3>
-                        <p><strong>Departure:</strong> Melbourne, 10th January</p>
-                        <p><strong>Available Seats:</strong> 3</p>
-                        <p><strong>Price:</strong> $50</p>
-                        <button class="btn btn-primary w-100">Book Ride</button>
-                    </div>
-                    <div class="ride-card">
-                        <img src="ride2.jpg" alt="Ride 2">
-                        <h3>Melbourne to Brisbane</h3>
-                        <p><strong>Departure:</strong> Melbourne, 12th January</p>
-                        <p><strong>Available Seats:</strong> 2</p>
-                        <p><strong>Price:</strong> $70</p>
-                        <button class="btn btn-primary w-100">Book Ride</button>
-                    </div>
-                    <div class="ride-card">
-                        <img src="ride3.jpg" alt="Ride 3">
-                        <h3>Melbourne to Adelaide</h3>
-                        <p><strong>Departure:</strong> Melbourne, 15th January</p>
-                        <p><strong>Available Seats:</strong> 1</p>
-                        <p><strong>Price:</strong> $60</p>
-                        <button class="btn btn-primary w-100">Book Ride</button>
-                    </div>
+                <div class="text-center mt-3">
+                    <a href="/all_rides" class="btn btn-secondary">Browse All Rides</a>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION SIX: Ride Alerts -->
-        <section class="ride-alerts my-4">
+        <!-- SECTION FOUR: Available Rides (Search Results) -->
+        <section class="ride-cards my-5">
             <div class="container">
-                <h2>Sign up for Ride Alerts</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="alertLocation" class="form-label">Location</label>
-                        <input type="text" id="alertLocation" class="form-control" placeholder="Enter location">
+                <h2>Search Results</h2>
+
+                <% if (typeof rides === 'undefined' || !Array.isArray(rides) || rides.length === 0) { %>
+                    <p>No rides found. Try adjusting your search criteria.</p>
+                <% } else { %>
+                    <div class="ride-container">
+                        <% rides.forEach(ride => { %>
+                            <div class="ride-card">
+                                <h3><%= ride.leavingFrom %> to <%= ride.goingTo %></h3>
+                                <p><strong>Departure:</strong> <%= ride.travelDate %></p>
+                                <p><strong>Available Seats:</strong> <%= ride.numSeats %></p>
+                                <p><strong>Passenger Type:</strong> <%= ride.passengerType %></p>
+                                <p><strong>Price:</strong> $<%= ride.price %></p>
+                                <a href="/book_ride?id=<%= ride.id %>" class="btn btn-primary w-100">Book Ride</a>
+                            </div>
+                        <% }); %>
                     </div>
-                    <div class="mb-3">
-                        <label for="alertDate" class="form-label">Preferred Date</label>
-                        <input type="date" id="alertDate" class="form-control">
+                <% } %>
+            </div>
+        </section>
+
+        <!-- SECTION FIVE: Browse All Rides -->
+        <section class="all-rides my-5">
+            <div class="container">
+                <h2>Browse All Available Rides</h2>
+
+                <% if (typeof allRides === 'undefined' || !Array.isArray(allRides) || allRides.length === 0) { %>
+                    <p>No rides available at the moment.</p>
+                <% } else { %>
+                    <div class="ride-container">
+                        <% allRides.forEach(ride => { %>
+                            <div class="ride-card">
+                                <h3><%= ride.leavingFrom %> to <%= ride.goingTo %></h3>
+                                <p><strong>Departure:</strong> <%= ride.travelDate %></p>
+                                <p><strong>Available Seats:</strong> <%= ride.numSeats %></p>
+                                <p><strong>Passenger Type:</strong> <%= ride.passengerType %></p>
+                                <p><strong>Price:</strong> $<%= ride.price %></p>
+                                <a href="/book_ride?id=<%= ride.id %>" class="btn btn-primary w-100">Book Ride</a>
+                            </div>
+                        <% }); %>
                     </div>
-                    <button type="submit" class="btn btn-primary">Get Alerts</button>
-                </form>
+                <% } %>
             </div>
         </section>
     </main>

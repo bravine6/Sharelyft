@@ -361,8 +361,79 @@ app.post('/reset_password', async (req, res) => {
   });
 });
 
+// Route for offer ride
+app.post('/offer_ride', isAuthenticated, (req, res) => {
+  const { leavingFrom, goingTo, travelDate, departureTime, numSeats, passengerType, price } = req.body;
+  const driverId = req.session.userId;
+
+  if (!leavingFrom || !goingTo || !travelDate || !departureTime || !numSeats || !passengerType || !price) {
+      return res.status(400).send("All fields are required.");
+  }
+
+  const query = `INSERT INTO rides (driverId, leavingFrom, goingTo, travelDate, departureTime, numSeats, passengerType, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+  db.run(query, [driverId, leavingFrom, goingTo, travelDate, departureTime, numSeats, passengerType, price], function (err) {
+      if (err) {
+          console.error("Error saving ride:", err);
+          return res.status(500).send("Error saving ride details.");
+      }
+      console.log(`✅ Ride offered successfully by User ID ${driverId}`);
+      res.redirect('/find_ride');
+  });
+});
 
 
+// Route to find ride
+app.get('/find_rides', (req, res) => {
+  const { leavingFrom, goingTo, travelDate } = req.query;
+
+  const query = `SELECT * FROM rides WHERE leavingFrom = ? AND goingTo = ? AND travelDate = ? ORDER BY departureTime ASC`;
+
+  db.all(query, [leavingFrom, goingTo, travelDate], (err, rides) => {
+      if (err) {
+          console.error("Error fetching rides:", err);
+          return res.status(500).send("Error retrieving rides.");
+      }
+
+      res.render('find_ride', { 
+          title: 'Find a Ride - Sharelyft',
+          cssFile: 'find_ride.css',
+          jsFile: 'find_ride.js',
+          rides: rides || [] // Ensure it's an array
+      });
+  });
+});
+
+
+
+app.get('/find_ride', (req, res) => {
+  res.render('find_ride', {
+      title: 'Find a Ride - Sharelyft',
+      cssFile: 'find_ride.css',
+      jsFile: 'find_ride.js',
+      rides: [] // Ensuring rides is always passed, even if empty
+  });
+});
+
+ // Get all rides offered by all users
+ app.get('/all_rides', (req, res) => {
+  const query = `SELECT * FROM rides ORDER BY travelDate ASC`;
+
+  db.all(query, [], (err, rides) => {
+      if (err) {
+          console.error("Error fetching all rides:", err);
+          return res.status(500).send("Error retrieving all rides.");
+      }
+
+      res.render('find_ride', { 
+          title: 'Find a Ride - Sharelyft',
+          cssFile: 'find_ride.css',
+          jsFile: 'find_ride.js',
+          rides: [],
+          allRides: rides || [] // Pass all rides to the template
+      });
+  });
+});
 // Logout route
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {

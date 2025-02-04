@@ -1,10 +1,9 @@
 <%- include('header') %>
 
 <body>
-    <!-- Include the Navbar -->
     <%- include('navbar', { activePage: 'offer_ride' }) %>
+
     <main>
-        <!-- SECTION TWO: Header Section -->
         <section class="hero-section py-5 text-center">
             <div class="container">
                 <h1 class="display-4">Offer a Ride</h1>
@@ -12,61 +11,53 @@
             </div>
         </section>
 
-        <!-- SECTION THREE: Offer a Ride Form -->
         <div class="container mt-5">
             <h2>Provide Ride Details</h2>
-            <form id="offerRideForm" class="needs-validation" novalidate>
+            <form action="/offer_ride" method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="leavingFrom" class="form-label">Where are you leaving from?</label>
-                    <input type="text" class="form-control" id="leavingFrom" placeholder="Enter departure location"
-                        required>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please provide a departure location.</div>
+                    <input type="text" class="form-control" name="leavingFrom" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="goingTo" class="form-label">Where are you going?</label>
-                    <input type="text" class="form-control" id="goingTo" placeholder="Enter destination" required>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please provide a destination.</div>
+                    <input type="text" class="form-control" name="goingTo" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="travelDate" class="form-label">Date of travel</label>
-                    <input type="date" class="form-control" id="travelDate" required>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please provide a valid date.</div>
+                    <input type="date" class="form-control" name="travelDate" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="departureTime" class="form-label">Departure Time</label>
+                    <input type="time" class="form-control" name="departureTime" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="numSeats" class="form-label">Number of seats available</label>
-                    <input type="number" class="form-control" id="numSeats" placeholder="Enter number of seats" required min="1">
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please provide the number of available seats.</div>
+                    <input type="number" class="form-control" name="numSeats" required min="1">
                 </div>
 
                 <div class="mb-3">
-                    <label for="passengerType" class="form-label">Types of passengers required</label>
-                    <select class="form-select" id="passengerType" required>
-                        <option value="" disabled selected>Select passenger type</option>
+                    <label for="passengerType" class="form-label">Passenger Preferences</label>
+                    <select class="form-select" name="passengerType" required>
+                        <option value="all">Any</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="all">Any gender</option>
                     </select>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please select the passenger type.</div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price per seat ($)</label>
+                    <input type="number" class="form-control" name="price" required min="0">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Ride</button>
             </form>
         </div>
     </main>
 
-    <!-- Include the Footer -->
     <%- include('footer') %>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/offer_ride.js"></script>
 </body>
-
 </html>
