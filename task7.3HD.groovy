@@ -1,7 +1,6 @@
 pipeline{
     agent any
     environment {
-        DIRECTORY_PATH     = 'C:/Users/Admin/Documents/DEAKIN/SEMESTER 2 T1 2025/SIT753- PROFESSIONAL PRACTICE/week 7'
         TESTING_ENVIRONMENT = "DOCKER"
         PRODUCTION_ENVIRONMENT = "AWS-EC2"
         SONAR_TOKEN = credentials('sonar-token')
