@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "id": "test1",
+      "title": "No high vulnerabilities found",
+      "description": "No high or critical severity vulnerabilities detected",
+      "severity": "info",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 0,
+    "total": 1
+  }
+}

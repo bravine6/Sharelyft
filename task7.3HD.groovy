@@ -291,7 +291,7 @@ pipeline{
             echo "ShareLyft pipeline execution completed"
             // Archive test and coverage reports
             archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
-            junit '**/test-results/*.xml'
+            junit testResults: '**/test-results/*.xml', allowEmptyResults: true
             
             // Generate test coverage report
             publishHTML(target: [
@@ -309,6 +309,8 @@ pipeline{
         success {
             echo "ShareLyft pipeline executed successfully"
             slackSend(
+                tokenCredentialId: 'slack-webhook',
+                channel: '#sharelyft-ci',
                 color: 'good',
                 message: "ShareLyft pipeline succeeded: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
             )
@@ -316,12 +318,14 @@ pipeline{
         failure {
             echo "ShareLyft pipeline execution failed"
             slackSend(
+                tokenCredentialId: 'slack-webhook',
+                channel: '#sharelyft-ci',
                 color: 'danger',
                 message: "ShareLyft pipeline failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
             )
             mail to: "mickybravine@gmail.com",
             subject: "ShareLyft Pipeline Failed: ${currentBuild.fullDisplayName}",
-            body: "Pipeline failed at stage: ${currentBuild.currentExecutable}. Check the Jenkins console output for details."
+            body: "Pipeline failed. Check the Jenkins console output for details: ${env.BUILD_URL}"
         }
     }
 }
