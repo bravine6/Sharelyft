@@ -11,7 +11,13 @@ pipeline{
     tools {
         nodejs 'NodeJS-16'
     }
-    stages{
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo "Checking out source code from GitHub"
+                checkout scm
+            }
+        }
         stage('Build') {
             steps{
                 echo "Building ShareLyft Node.js application"
@@ -158,7 +164,7 @@ pipeline{
                         sleep 10
                         
                         # Run smoke tests
-                        curl -f http://test-sharelyft:3000/api/health || exit 1
+                        curl -f http://localhost:3000/ || exit 1
                         npm run test:smoke
                         
                         echo "ShareLyft smoke tests passed"
