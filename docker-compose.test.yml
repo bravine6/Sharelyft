@@ -7,16 +7,5 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=test
-      - DATABASE_URL=postgres://user:password@test-db:5432/sharelyft_test
-    depends_on:
-      - test-db
-  
-  test-db:
-    image: postgres:14-alpine
-    container_name: test-db
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=sharelyft_test
+    volumes:
+      - ./members.db:/app/members.db

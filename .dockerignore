@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+coverage
+test
+test-results
+reports
+*.md
+**/node_modules
+dist

@@ -23,3 +23,5 @@ token
 ShareLyft_CI_CD_Setup_Guide.md
 JENKINS_CREDENTIALS_SETUP.md
 PIPELINE_SETUP_GUIDE.md
+
+**/.claude/settings.local.json

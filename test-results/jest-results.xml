@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="2.125">
+  <testsuite name="Sample Unit Test" errors="0" failures="0" skipped="0" timestamp="2025-05-24T12:32:31" time="1.58" tests="1">
+    <testcase classname="Sample Unit Test should pass a simple test" name="Sample Unit Test should pass a simple test" time="0.015">
+    </testcase>
+  </testsuite>
+  <testsuite name="Sample Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-05-24T12:32:31" time="1.581" tests="1">
+    <testcase classname="Sample Integration Test should pass a simple integration test" name="Sample Integration Test should pass a simple integration test" time="0.019">
+    </testcase>
+  </testsuite>
+</testsuites>

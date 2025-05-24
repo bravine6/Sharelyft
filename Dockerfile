@@ -2,13 +2,16 @@ FROM node:16-alpine
 
 WORKDIR /app
 
+# Copy only package files first for better caching
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci --production
 
-COPY dist/ ./dist/
-COPY public/ ./public/
-COPY server/ ./server/
+# Copy only necessary files (not node_modules)
+COPY index.js ./
+COPY src/ ./src/
+COPY views/ ./views/
+COPY public_html/ ./public_html/
 
 EXPOSE 3000
 
-CMD ["node", "server/index.js"]
+CMD ["node", "index.js"]
