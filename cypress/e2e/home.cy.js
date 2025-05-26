@@ -2,6 +2,6 @@
 describe('Home Page', () => {
   it('loads successfully', () => {
     cy.visit('/');
-    cy.contains('Welcome'); // Adjust based on your homepage
+    cy.contains('Offer a Ride'); // Adjust based on your homepage
   });
 });
