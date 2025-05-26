@@ -1,7 +1,7 @@
 version: '3'
 services:
   test-sharelyft:
-    image: sharelyft:${BUILD_NUMBER}
+    image: ropbravine/sharelyft:${BUILD_NUMBER}
     container_name: test-sharelyft
     ports:
       - "3000:3000"
