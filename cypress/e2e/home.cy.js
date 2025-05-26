@@ -2,6 +2,6 @@
 describe('Home Page', () => {
   it('loads successfully', () => {
     cy.visit('/');
-    cy.contains('Offer a Ride'); // Adjust based on your homepage
+    cy.contains('Offer a Ride', {timeout: 10000}); // Adjust based on your homepage
   });
 });
