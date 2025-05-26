@@ -1,0 +1,389 @@
+Started by user admin
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/test2
+[Pipeline] {
+[Pipeline] withCredentials
+WARNING: Unknown parameter(s) found for class type 'com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding': keyIdVariable,secretVariable
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY or $DOCKER_CREDENTIALS or $DOCKER_CREDENTIALS_PSW or $SONAR_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone Repo)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] git
+The recommended git tool is: git
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/bravine6/Sharelyft.git
+ > git init /var/jenkins_home/workspace/test2 # timeout=10
+Fetching upstream changes from https://github.com/bravine6/Sharelyft.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/bravine6/Sharelyft.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/bravine6/Sharelyft.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e35c51fae33836c0283fbd3250180fba4441a132 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e35c51fae33836c0283fbd3250180fba4441a132 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main e35c51fae33836c0283fbd3250180fba4441a132 # timeout=10
+Commit message: "Fix: Update home.cy.js test selector to match visible text"
+ > git rev-list --no-walk e35c51fae33836c0283fbd3250180fba4441a132 # timeout=10
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Building ShareLyft Node.js application
+[Pipeline] sh
++ npm ci
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated gauge@4.0.4: This package is no longer supported.
+
+added 919 packages, and audited 920 packages in 24s
+
+122 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
++ npm run build
+
+> sharelyft@1.0.0 build
+> webpack --config webpack.prod.js
+
+asset offer_ride.bundle.js 1.09 KiB [emitted] [minimized] (name: offer_ride)
+asset register.bundle.js 110 bytes [emitted] [minimized] (name: register)
+asset contact_us.bundle.js 0 bytes [emitted] [minimized] (name: contact_us)
+asset login.bundle.js 0 bytes [emitted] [minimized] (name: login)
+asset profile.bundle.js 0 bytes [emitted] [minimized] (name: profile)
+./public_html/contact_us.js 1 bytes [built] [code generated]
+./public_html/login.js 956 bytes [built] [code generated]
+./public_html/offer_ride.js 2.16 KiB [built] [code generated]
+./public_html/profile.js 1 bytes [built] [code generated]
+./public_html/register.js 4.54 KiB [built] [code generated]
+webpack 5.99.8 compiled successfully in 1730 ms
++ docker build -t sharelyft:21 .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:96bc7a60721eb1ac668ca12dc42cb95f5e005dfca59e2eb36b41a73d154e6b6c
+#1 transferring dockerfile: 345B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/node:16-alpine
+#2 sha256:cc5ca11d424b4794fe375a19c9b943f1392a0432da020d6a3f929992b4303e17
+#2 DONE 2.3s
+
+#3 [internal] load .dockerignore
+#3 sha256:592ee5a3df337f8214de2364ef445483bf3e85c8b86ff021b30a84615e2adc99
+#3 transferring context:
+#3 transferring context: 143B 0.0s done
+#3 DONE 0.1s
+
+#10 [internal] load build context
+#10 sha256:c5e4de41e40a3735db99e791664460a86201d35ce55e368676b32a2dcca546d7
+#10 ...
+
+#12 [1/8] FROM docker.io/library/node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787
+#12 sha256:57f9fef9f4e703116b9cc44e55ccf3b80d1dcb51e558725d4a90f618d4c34fad
+#12 resolve docker.io/library/node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787 0.2s done
+#12 DONE 0.2s
+
+#10 [internal] load build context
+#10 sha256:c5e4de41e40a3735db99e791664460a86201d35ce55e368676b32a2dcca546d7
+#10 transferring context: 4.60MB 1.4s done
+#10 DONE 1.4s
+
+#8 [4/8] RUN npm ci --production
+#8 sha256:ba7c30df26142e094c0061be7f84637cab6a8a54c5c1fd36c84d26d6b00a6285
+#8 CACHED
+
+#7 [5/8] COPY index.js ./
+#7 sha256:fa5e387d1fc4cb7e35e410020ccbecc343a582302badd62488e277a127273fef
+#7 CACHED
+
+#6 [6/8] COPY src/ ./src/
+#6 sha256:50c5f25afd1608c6373d407ac7aae9ee5a0777c85189fae5b98d440658020f9e
+#6 CACHED
+
+#5 [7/8] COPY views/ ./views/
+#5 sha256:0b037ccf5cf4effbaf4186c9a0fad61cb2c01b70490f55e63dda7542050fd456
+#5 CACHED
+
+#11 [2/8] WORKDIR /app
+#11 sha256:178f7fb31028d8f833f514554ff7907d87714813bbf3c0aa6653a6351b653bc5
+#11 CACHED
+
+#9 [3/8] COPY package*.json ./
+#9 sha256:e51932aa7fdab9915af5fcc6aa632adf7e16208d00fec515b11ea9abcc55aa67
+#9 CACHED
+
+#4 [8/8] COPY public_html/ ./public_html/
+#4 sha256:16c9f5a8f2044e44eb919f59aaf3e91340725db368c39051735e709c65c70c23
+#4 CACHED
+
+#13 exporting to image
+#13 sha256:cb108752464df65851ad0c2f895941069bfe75ff56d7673dbf17a4651ad27e69
+#13 exporting layers 0.0s done
+#13 exporting manifest sha256:307738bd1e14c44bf9b82a68a7c946537d60cd84ef46cfa5b8ff458cf6522b86 done
+#13 exporting config sha256:2588e9691cf03360e8515fd1a9ba916f10117601e502f55582c413205072e0b6 done
+#13 naming to docker.io/library/sharelyft:21 done
+#13 unpacking to docker.io/library/sharelyft:21 0.0s done
+#13 DONE 0.2s
+Post stage
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] echo
+ShareLyft build artifacts archived
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Running ShareLyft automated tests
+[Pipeline] sh
++ npx wait-on http://localhost:3000
++ npm run start
+
+> sharelyft@1.0.0 start
+> node index.js
+
+Web server running at: http://localhost:3000
+Connected to SQLite database.
++ npm run test:unit
+
+> sharelyft@1.0.0 test:unit
+> jest --testPathPattern=src/__tests__/unit
+
+PASS src/__tests__/unit/sample.test.js
+  Sample Unit Test
+    ✓ should pass a simple test (4 ms)
+
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+All files |       0 |        0 |       0 |       0 |                   
+----------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.492 s, estimated 1 s
+Ran all test suites matching /src\/__tests__\/unit/i.
++ npm run test:integration
+
+> sharelyft@1.0.0 test:integration
+> jest --testPathPattern=src/__tests__/integration
+
+PASS src/__tests__/integration/sample.test.js
+  Sample Integration Test
+    ✓ should pass a simple integration test (3 ms)
+
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+All files |       0 |        0 |       0 |       0 |                   
+----------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.308 s, estimated 1 s
+Ran all test suites matching /src\/__tests__\/integration/i.
++ npm run test:e2e
+
+> sharelyft@1.0.0 test:e2e
+> cypress run
+
+
+DevTools listening on ws://127.0.0.1:35695/devtools/browser/29a5a8d2-4593-46f8-80e6-700de153dd11
+
+tput: No value for $TERM and no -T specified
+[90m====================================================================================================[39m
+
+[0m  ([4m[1mRun Starting[22m[24m)[0m
+
+[90m  ┌[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┐[39m
+[90m  │[39m [90mCypress:[39m        14.3.3                                                                         [90m│[39m
+[90m  │[39m [90mBrowser:[39m        Electron 130 [90m(headless)[39m                                                        [90m│[39m
+[90m  │[39m [90mNode Version:[39m   [0mv24.1.0 [90m(/var/jenkins_home/tools/jenkins.plugins.nodejs.tools.NodeJSInsta[0m      [90m│[39m
+[90m  │[39m                 [0mllation/NodeJS-16/bin/node)[39m[0m                                                    [90m│[39m
+[90m  │[39m [90mSpecs:[39m          [0m1 found (home.cy.js)[0m                                                           [90m│[39m
+[90m  │[39m [90mSearched:[39m       [0mcypress/e2e/**/*.cy.js[0m                                                         [90m│[39m
+[90m  └[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┘[39m
+
+
+[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m
+                                                                                                    
+  Running:  [90mhome.cy.js[39m                                                                      [90m(1 of 1)[39m
+
+[0m[0m
+[0m  Home Page[0m
+  [31m  1) loads successfully[0m
+
+
+[92m [0m[32m 0 passing[0m[90m (5s)[0m
+[31m  1 failing[0m
+
+[0m  1) Home Page
+       loads successfully:
+[0m[31m     AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Offer a Ride' but never did.[0m[90m
+      at Context.eval (webpack://sharelyft/./cypress/e2e/home.cy.js:5:7)
+[0m
+
+
+
+[31m  ([4m[1mResults[22m[24m)[39m
+
+[90m  ┌[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┐[39m
+[90m  │[39m [90mTests:[39m        [31m1[39m                                                                                [90m│[39m
+[90m  │[39m [90mPassing:[39m      [31m0[39m                                                                                [90m│[39m
+[90m  │[39m [90mFailing:[39m      [31m1[39m                                                                                [90m│[39m
+[90m  │[39m [90mPending:[39m      [31m0[39m                                                                                [90m│[39m
+[90m  │[39m [90mSkipped:[39m      [31m0[39m                                                                                [90m│[39m
+[90m  │[39m [90mScreenshots:[39m  [31m1[39m                                                                                [90m│[39m
+[90m  │[39m [90mVideo:[39m        [31mfalse[39m                                                                            [90m│[39m
+[90m  │[39m [90mDuration:[39m     [31m5 seconds[39m                                                                        [90m│[39m
+[90m  │[39m [90mSpec Ran:[39m     [31m[31mhome.cy.js[31m[39m                                                                       [90m│[39m
+[90m  └[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┘[39m
+
+
+[33m  ([4m[1mScreenshots[22m[24m)[39m
+
+[90m [39m -  [0m/var/jenkins_home/workspace/test2/cypress/screenshots/home.cy.js/Home Page -- lo[0m     [90m[90m(1280x720)[90m[39m
+[90m [39m    [0mads successfully (failed).png[0m                                                                  
+
+
+tput: No value for $TERM and no -T specified
+[90m====================================================================================================[39m
+
+[0m  ([4m[1mRun Finished[22m[24m)[0m
+
+
+[90m   [39m    [90mSpec[39m                                              [90mTests[39m  [90mPassing[39m  [90mFailing[39m  [90mPending[39m  [90mSkipped[39m [90m [39m
+[90m  ┌[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┐[39m
+[90m  │[39m [31m✖[39m  [0mhome.cy.js[0m                               [90m00:05[39m        [0m1[0m        [90m-[39m        [31m1[39m        [90m-[39m        [90m-[39m [90m│[39m
+[90m  └[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m─[39m[90m┘[39m
+[90m   [39m [31m✖[39m  [31m1 of 1 failed (100%)[39m                     [90m00:05[39m        [0m1[0m        [90m-[39m        [31m1[39m        [90m-[39m        [90m-[39m [90m [39m
+
+[90m----------------------------------------------------------------------------------------------------[39m
+tput: No value for $TERM and no -T specified
+
+  Debug faster with full visibility.
+
+  Record to Cypress Cloud and get instant access to full test details and replays.
+  Inspect the DOM, network events, and console logs exactly as they ran in CI.
+
+  >> [36mhttps://on.cypress.io/cloud-get-started[39m
+
+tput: No value for $TERM and no -T specified
+[90m----------------------------------------------------------------------------------------------------[39m
+Post stage
+[Pipeline] mail
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Quality)
+Stage "Code Quality" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security)
+Stage "Security" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+Stage "Deploy" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Approval)
+Stage "Approval" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Release)
+Stage "Release" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Monitoring)
+Stage "Monitoring" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+ShareLyft pipeline execution completed
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] junit
+Recording test results
+[Checks API] No suitable checks publisher found.
+[Pipeline] publishHTML
+[htmlpublisher] Archiving HTML reports...
+[htmlpublisher] Archiving at BUILD level /var/jenkins_home/workspace/test2/coverage/lcov-report to /var/jenkins_home/jobs/test2/builds/21/htmlreports/ShareLyft_20Code_20Coverage_20Report
+[htmlpublisher] Copying recursive using current thread
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] withCredentials
+Masking supported pattern matches of $SLACK_WEBHOOK
+[Pipeline] {
+[Pipeline] slackSend
+Slack Send Pipeline step running, values are - baseUrl: <empty>, teamDomain: <empty>, channel: #sharelyft-ci, color: danger, botUser: false, tokenCredentialId: slack-webhook, notifyCommitters: false, iconEmoji: <empty>, username: <empty>, timestamp: <empty>
+ERROR: Slack notification failed. See Jenkins logs for details.
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] mail
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
