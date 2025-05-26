@@ -42,6 +42,7 @@
     "jest-junit": "^16.0.0",
     "mocha": "^11.2.2",
     "owasp-dependency-check": "^0.0.25",
+    "wait-on": "^8.0.3",
     "webpack": "^5.99.8",
     "webpack-cli": "^6.0.1"
   }
