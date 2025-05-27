@@ -1,0 +1,7 @@
+organization=bravine6
+projectKey=sharelyft
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.63878
+dashboardUrl=https://sonarcloud.io/dashboard?id=sharelyft
+ceTaskId=AZcR8L74dPdLtUfGYwsX
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZcR8L74dPdLtUfGYwsX
