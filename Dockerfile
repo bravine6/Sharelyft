@@ -2,7 +2,18 @@
 FROM node:18-alpine
 
 # Install Docker CLI
-RUN apk add --no-cache docker-cli bash curl
+RUN apk add --no-cache \
+    bash \
+    curl \
+    docker-cli \
+    xvfb \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ttf-freefont \
+    ca-certificates \
+    && npm ci --production
 
 # Set working directory
 WORKDIR /app
