@@ -1,7 +1,7 @@
 # Use Node.js base image
 FROM node:18-alpine
 
-# Install required system dependencies for Docker CLI and Cypress
+# Install required system dependencies for Docker CLI and Cypress + unzip
 RUN apk add --no-cache \
     bash \
     curl \
@@ -12,7 +12,14 @@ RUN apk add --no-cache \
     freetype \
     harfbuzz \
     ttf-freefont \
-    ca-certificates
+    ca-certificates \
+    unzip
+
+# Install SonarScanner CLI
+RUN curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip \
+    && unzip sonar-scanner.zip -d /opt \
+    && ln -s /opt/sonar-scanner-*/bin/sonar-scanner /usr/local/bin/sonar-scanner \
+    && rm sonar-scanner.zip
 
 # Set working directory
 WORKDIR /app
