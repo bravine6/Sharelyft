@@ -1,7 +1,7 @@
 # Use Node.js base image
 FROM node:18-alpine
 
-# Install Docker CLI
+# Install required system dependencies for Docker CLI and Cypress
 RUN apk add --no-cache \
     bash \
     curl \
@@ -12,18 +12,17 @@ RUN apk add --no-cache \
     freetype \
     harfbuzz \
     ttf-freefont \
-    ca-certificates \
-    && npm ci --production
+    ca-certificates
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and install only production dependencies
 COPY package*.json ./
-RUN npm ci --production
+RUN npm ci --omit=dev
 
-# Copy application files
-COPY index.js ./
+# Copy application code
+COPY index.js ./  
 COPY src/ ./src/
 COPY views/ ./views/
 COPY public_html/ ./public_html/
@@ -31,5 +30,5 @@ COPY public_html/ ./public_html/
 # Expose app port
 EXPOSE 3000
 
-# Start the application
+# Start the app
 CMD ["node", "index.js"]
