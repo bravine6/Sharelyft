@@ -1,7 +1,7 @@
 # Use Node.js base image
 FROM node:18-alpine
 
-# Install system dependencies: unzip & Java for SonarScanner, plus your other tools
+# Install system dependencies: unzip & Java for SonarScanner + Docker CLI
 RUN apk add --no-cache \
     bash \
     curl \
@@ -9,29 +9,20 @@ RUN apk add --no-cache \
     unzip \
     openjdk11-jre
 
-# Install SonarScanner CLI
-# (adjust SCANNER_VERSION to the latest stable if needed)
-ENV SCANNER_VERSION=7.1.0.4889
-RUN curl -sSL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER_VERSION}-linux.zip" \
-    -o /tmp/sonar-scanner.zip \
-    && unzip /tmp/sonar-scanner.zip -d /opt \
-    && mv "/opt/sonar-scanner-${SCANNER_VERSION}-linux" /opt/sonar-scanner \
-    && ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner \
-    && rm /tmp/sonar-scanner.zip
+# Install the SonarScanner CLI via npm
+# this gives you `sonar-scanner` on the PATH
+RUN npm install -g sonarqube-scanner
 
 # Set working directory
 WORKDIR /app
 
 # Copy package files and install only production deps
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci 
 
-# Copy application code
-COPY index.js sonar.js ./
-COPY src/ ./src/
-COPY views/ ./views/
-COPY public_html/ ./public_html/
+# Copy everything else in one go
+COPY index.js sonar.js src/ views/ public_html/ ./
 
-# Expose & launch
+# Expose and run
 EXPOSE 3000
 CMD ["node", "index.js"]
