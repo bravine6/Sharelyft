@@ -25,3 +25,6 @@ JENKINS_CREDENTIALS_SETUP.md
 PIPELINE_SETUP_GUIDE.md
 
 **/.claude/settings.local.json
+
+dependency-check-bin/
+

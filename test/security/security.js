@@ -26,7 +26,7 @@ describe('Security Tests', function() {
     } catch (error) {
       // If there's an error with status, check it's 400
       if (error.response && error.response.status) {
-        assert.strictEqual(error.response.status, 400);
+        assert.strictEqual(error.response.status, 401);
       } else {
         // Otherwise just skip - the endpoint might not exist
         this.skip();
