@@ -1,0 +1,11 @@
+# Dockerfile.build  – small wrapper around your existing image
+# keep all your current tooling
+FROM ropbravine/sharelyft:latest     
+
+# --- Alpine variant ----
+# ropbravine/sharelyft is based on node:alpine, so use apk
+RUN apk add --no-cache docker-cli-compose   \
+    && docker compose version               
+
+# ----- If your base were Debian/Ubuntu -----
+# RUN apt-get update && apt-get install -y docker-compose-plugin
