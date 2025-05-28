@@ -6,22 +6,21 @@ RUN apk add --no-cache \
     bash \
     curl \
     docker-cli \
-    unzip \
-    openjdk11-jre
+    unzip 
 
 # Install the SonarScanner CLI via npm
 # this gives you `sonar-scanner` on the PATH
-RUN npm install -g sonarqube-scanner
+# RUN npm install -g @sonarsource/sonar-scanner-cli
 
 # Set working directory
 WORKDIR /app
 
 # Copy package files and install only production deps
 COPY package*.json ./
-RUN npm ci 
+RUN npm ci
 
 # Copy everything else in one go
-COPY index.js sonar.js src/ views/ public_html/ ./
+COPY . .
 
 # Expose and run
 EXPOSE 3000
